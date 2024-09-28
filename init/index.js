@@ -32,7 +32,7 @@ const   initDB = async ()=>{
 }
 
 
-initDB.apply();
+initDB();
 
 
 
