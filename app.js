@@ -71,6 +71,8 @@ const validateListing=(req,res,next)=>{
 
 
 
+
+
 //index route
 app.get("/listings",wrapAsync(async (req,res)=>{
     let allListing =await Listing.find({});
