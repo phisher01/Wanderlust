@@ -1,6 +1,7 @@
 const mongoose=require("mongoose");
 const initdata=require("./data.js");
 const Listing=require("../models/listing.js");
+const Review=require("../models/review.js");
 
 
 
@@ -26,6 +27,8 @@ const   initDB = async ()=>{
     
     
     await Listing.deleteMany({});
+    await Review.deleteMany({});
+
 
     await Listing.insertMany(initdata.data);
     console.log("data was initialized");
