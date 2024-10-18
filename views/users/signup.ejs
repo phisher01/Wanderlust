@@ -1,0 +1,52 @@
+<% layout("layouts/boiler.ejs") %>
+
+<div class="row mt-3">
+    <div class="col-6 offset-3" >
+        <h1>SignUp on WanderLust</h1>
+        
+        
+        <form action="/signup"  method="Post"  novalidate class="needs-validation">
+                
+               
+                <div class="mb-3">
+            <label    class="form-label"  for="username">Username</label>
+            <input type="text"   required   id="username"  class="form-control"     name="username" >
+            <div class="valid-feedback">looks good!</div>
+            <div class="invalid-feedback">Please enter your preferred username </div>
+        </div>
+
+
+
+                <div class="mb-3">
+            <label    class="form-label"  for="email">E-mail</label>
+            <input type="text"   required   id="email"  class="form-control"     name="email" >
+            <div class="invalid-feedback">Please enter your E-mail </div>
+        </div>
+        
+
+
+                <div class="mb-3">
+            <label    class="form-label"  for="passwd">Password</label>
+            <input type="text"   required   id="passwd"  class="form-control"     name="password" >
+            <div class="invalid-feedback">Please set your password </div>
+        </div>
+        
+
+
+
+
+        <button class="btn btn-success">Submit</button>
+
+
+
+
+
+
+
+
+
+
+        </form>
+</div>
+</div>
+            

@@ -1,0 +1,46 @@
+<% layout("layouts/boiler.ejs") %>
+
+<div class="row mt-3">
+    <div class="col-6 offset-3" >
+        <h1>Login </h1>
+        
+        
+        <form action="/login"  method="Post"  novalidate class="needs-validation">
+                
+               
+                <div class="mb-3">
+            <label    class="form-label"  for="username">Username</label>
+            <input type="text"   required   id="username"  class="form-control"     name="username" >
+            
+            <div class="invalid-feedback">Please enter your preferred username </div>
+        </div>
+
+
+
+
+
+                <div class="mb-3">
+            <label    class="form-label"  for="passwd">Password</label>
+            <input type="text"   required   id="passwd"  class="form-control"     name="password" >
+            <div class="invalid-feedback">Please set your password </div>
+        </div>
+        
+
+
+
+
+        <button class="btn btn-success">Login</button>
+
+
+
+
+
+
+
+
+
+
+        </form>
+</div>
+</div>
+            

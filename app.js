@@ -5,10 +5,16 @@ const path=require("path");
 const methodoverride=require("method-override");
 const ejsMate=require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
-const listings=require("./routes/listing.js");
-const reviews=require("./routes/review.js");
+const listingRouter=require("./routes/listing.js");
+const reviewRouter=require("./routes/review.js");
+const User=require("./models/user.js");
+const passport=require("passport");
+const LocalStrategy=require("passport-local");
+const userRouter=require("./routes/user.js");
 
-// const cookieParser = require("cookie-parser");\
+
+
+
 
 const Session=require("express-session");
 const flash=require("connect-flash");
@@ -81,19 +87,33 @@ async function main(){
 // })
 
 
+app.get("/",(req,res)=>{
+    res.send("I am root");
+   });
 
 
 
-    app.get("/",(req,res)=>{
-         res.send("I am root");
-        });
+        
+
+        app.use(Session(sessionOptions));
+        app.use(flash());
+        app.use(passport.initialize()); // to initialize passport 
+                                        // passport is a library used for authentication
+        app.use(passport.session()); // to identify same session and not to login again for another page in same website.
+
+        passport.use(new LocalStrategy(User.authenticate()));
+        //telling passport that we are authenticating through localstrategy and authenticate user with User.authenticate(). This method  is added by p-l-mongoose lib to model User
+        passport.serializeUser(User.serializeUser());
+        passport.deserializeUser(User.deserializeUser());
+        //serialize - to store all user's info in session 
+        //deserialize- to remove all user's info from session
 
 
-app.use(Session(sessionOptions));
-app.use(flash());
 
 
-app.use((req,res,next)=>{
+
+    app.use((req,res,next)=>{
+   
     res.locals.success=req.flash("success");
     res.locals.error=req.flash("error");
 
@@ -103,9 +123,23 @@ app.use((req,res,next)=>{
 });
 
 
-app.use("/listings",listings);
+// app.get("/demo",async(req,res)=>{
+//     let fakeuser=new User({
+//         email:"student@gamil.com",
+//         username:"delta-students",
 
-app.use("/listings/:id/reviews",reviews);
+
+//     });
+//     let registereduser=await User.register(fakeuser,"helloworld");
+//     res.send(registereduser);
+
+// })
+
+
+app.use("/listings",listingRouter);
+
+app.use("/listings/:id/reviews",reviewRouter);
+app.use("/",userRouter);
 
 
 
